@@ -1,0 +1,8 @@
+From node:16 AS developer
+WORKDIR /app
+copy package*.json .
+Run npm install
+COPY . .
+RUN npm run build
+fROM nginx:latest AS application
+copy --from developer /app/build /usr/share/nginx/html
